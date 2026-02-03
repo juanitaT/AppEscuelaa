@@ -37,7 +37,9 @@ class MainActivity : ComponentActivity() {
                     }
 
                     "perfil" -> {
-                        PerfilScreen()
+                        PerfilScreen(
+                            snRepository = appContainer.snRepository
+                        )
                     }
                 }
             }

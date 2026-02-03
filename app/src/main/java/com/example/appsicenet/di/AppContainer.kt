@@ -11,7 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 interface AppContainer {
-
     val snRepository: SNRepository
 }
 
@@ -38,4 +37,3 @@ class DefaultAppContainer(
         NetworSNRepository(sicenetService)
     }
 }
-

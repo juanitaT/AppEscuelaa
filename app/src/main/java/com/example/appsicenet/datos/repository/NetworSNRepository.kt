@@ -5,6 +5,7 @@ import com.example.appsicenet.datos.modelo.LoginResult
 import com.example.appsicenet.datos.modelo.PerfilAlumnos
 import com.example.appsicenet.datos.remote.SICENETWService
 import com.example.appsicenet.datos.remote.SoapRequestBuilder
+import com.google.gson.Gson
 
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -27,7 +28,9 @@ class NetworSNRepository(
         Log.d("SICENET_XML", xml)
 
         val accesoCorrecto =
-            xml.contains("<accesoLoginResult>true</accesoLoginResult>")
+            xml.contains("\"acceso\":true")
+
+        Log.d("SICENET_LOGIN", "Acceso correcto = $accesoCorrecto")
 
         return if (accesoCorrecto) {
             LoginResult(
@@ -41,8 +44,26 @@ class NetworSNRepository(
             )
         }
     }
-
     override suspend fun obtenerPerfil(): PerfilAlumnos {
-        TODO("Not yet implemented")
+
+        val body = SoapRequestBuilder.perfil()
+            .toRequestBody("text/xml; charset=utf-8".toMediaType())
+
+        val response = snApiService.getAlumnoAcademico(body)
+        val xml = response.string()
+
+        Log.d("SICENET_PERFIL_XML", xml)
+
+        val json = extraerJson(xml)
+
+        Log.d("SICENET_PERFIL_JSON", json)
+
+        return Gson().fromJson(json, PerfilAlumnos::class.java)
     }
+
+    private fun extraerJson(xml: String): String {
+        return xml.substringAfter("<getAlumnoAcademicoResult>")
+            .substringBefore("</getAlumnoAcademicoResult>")
+    }
+
 }
