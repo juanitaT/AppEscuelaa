@@ -2,6 +2,7 @@ package com.example.appsicenet.datos.repository
 
 import android.util.Log
 import com.example.appsicenet.datos.modelo.LoginResult
+import com.example.appsicenet.datos.modelo.PerfilAlumnos
 import com.example.appsicenet.datos.remote.SICENETWService
 import com.example.appsicenet.datos.remote.SoapRequestBuilder
 
@@ -39,5 +40,9 @@ class NetworSNRepository(
                 message = "Credenciales inválidas"
             )
         }
+    }
+
+    override suspend fun obtenerPerfil(): PerfilAlumnos {
+        TODO("Not yet implemented")
     }
 }
