@@ -30,7 +30,7 @@ import com.example.appsicenet.datos.repository.SNRepository
 fun HomeScreen(
     onLoginSuccess: () -> Unit,
     snRepository: SNRepository
-) {
+) { //aqui se carga el repositorio de la pantalla de perfil
     val viewModel: LoginViewModel = viewModel(
         factory = LoginViewModelFactory(snRepository)
     )
@@ -69,7 +69,7 @@ fun HomeScreen(
         )
 
         Spacer(modifier = Modifier.height(24.dp))
-
+// aqui hace la validacion del login 
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {

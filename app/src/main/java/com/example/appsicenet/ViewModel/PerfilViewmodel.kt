@@ -21,4 +21,5 @@ class PerfilViewModel(
             perfil = snRepository.obtenerPerfil()
         }
     }
+
 }
