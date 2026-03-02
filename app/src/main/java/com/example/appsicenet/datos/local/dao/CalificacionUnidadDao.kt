@@ -3,6 +3,7 @@ package com.example.appsicenet.datos.local.dao
     import androidx.room.Insert
     import androidx.room.OnConflictStrategy
     import androidx.room.Query
+    import com.example.appsicenet.datos.local.entity.CalificacionUnidadEntity
     import kotlinx.coroutines.flow.Flow
 
     @Dao

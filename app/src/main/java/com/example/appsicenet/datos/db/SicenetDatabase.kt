@@ -15,7 +15,6 @@ import com.example.appsicenet.datos.local.entity.CardexEntity
 import com.example.appsicenet.datos.local.entity.CargaAcademicaEntity
 import com.example.appsicenet.datos.local.entity.PerfilEntity
 
-
 @Database(
     entities = [
         PerfilEntity::class,
