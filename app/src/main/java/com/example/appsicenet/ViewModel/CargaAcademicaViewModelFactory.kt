@@ -5,21 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
 import com.example.appsicenet.datos.repository.LocalSNRepository
-import com.example.appsicenet.datos.repository.SNRepository
 
-class LoginViewModelFactory(
-    context: Context,
-    private val snRepository: SNRepository,
-    private val localRepository: LocalSNRepository
+class CargaAcademicaViewModelFactory(
+    private val localRepository: LocalSNRepository,
+    private val context: Context
 ) : ViewModelProvider.Factory {
 
     private val workManager = WorkManager.getInstance(context)
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(CargaAcademicaViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return LoginViewModel(
-                snRepository,
+            return CargaAcademicaViewModel(
                 localRepository,
                 workManager
             ) as T
