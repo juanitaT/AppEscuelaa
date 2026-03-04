@@ -1,18 +1,20 @@
-package com.example.appsicenet.datos.repository
-
 import android.util.Log
 import com.example.appsicenet.datos.modelo.LoginResult
 import com.example.appsicenet.datos.modelo.PerfilAlumnos
 import com.example.appsicenet.datos.remote.SICENETWService
 import com.example.appsicenet.datos.remote.SoapRequestBuilder
+import com.example.appsicenet.datos.repository.SNRepository
+
 import com.google.gson.Gson
 
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
-    class NetworSNRepository(
+import kotlin.jvm.java
+
+class NetworSNRepository(
     private val snApiService: SICENETWService
 ) : SNRepository {
-    // consulta para el login
+
     override suspend fun acceso(
         m: String,
         p: String
@@ -22,51 +24,39 @@ import okhttp3.RequestBody.Companion.toRequestBody
             .toRequestBody("text/xml; charset=utf-8".toMediaType())
 
         val response = snApiService.acceso(body)
-
-        // Extrae la respuesta del servidor
         val xml = response.string()
-        // Registra la respuesta
+
         Log.d("SICENET_XML", xml)
 
-        // Analiza la respuesta para determinar si el login fue exitoso.
-        // Busca una subcadena específica que indica un acceso correcto.
-        val accesoCorrecto =
-            xml.contains("\"acceso\":true")
+        val accesoCorrecto = xml.contains("\"acceso\":true")
 
-        // Registra el resultado del intento de login.
         Log.d("SICENET_LOGIN", "Acceso correcto = $accesoCorrecto")
 
         return if (accesoCorrecto) {
-            LoginResult(
-                success = true,
-                message = "Login correcto"
-            )
+            LoginResult(true, "Login correcto")
         } else {
-            LoginResult(
-                success = false,
-                message = "Credenciales inválidas"
-            )
+            LoginResult(false, "Credenciales inválidas")
         }
     }
 
-    // Obtiene el perfil académico del alumno que ha iniciado sesión.
-    // corrutina
-    override suspend fun obtenerPerfil(): PerfilAlumnos {
+    override suspend fun obtenerPerfilJson(): String {
 
         val body = SoapRequestBuilder.perfil()
             .toRequestBody("text/xml; charset=utf-8".toMediaType())
 
         val response = snApiService.getAlumnoAcademico(body)
-
         val xml = response.string()
-
-        // Registra
-        Log.d("SICENET_PERFIL_XML", xml)
 
         val json = extraerJson(xml)
 
-        // para ver la informacion del perfil desde el logcat
         Log.d("SICENET_PERFIL_JSON", json)
+
+        return json
+    }
+
+    override suspend fun obtenerPerfil(): PerfilAlumnos {
+
+        val json = obtenerPerfilJson()
 
         return Gson().fromJson(json, PerfilAlumnos::class.java)
     }
@@ -76,4 +66,36 @@ import okhttp3.RequestBody.Companion.toRequestBody
             .substringBefore("</getAlumnoAcademicoResult>")
     }
 
+    override suspend fun obtenerCardexXml(): String {
+
+        val body = SoapRequestBuilder.cardex(1)
+            .toRequestBody("text/xml; charset=utf-8".toMediaType())
+
+        val response = snApiService.getCardex(body)
+        return response.string()
+    }
+
+    override suspend fun obtenerCalificacionesUnidadesXml(): String {
+        val body = SoapRequestBuilder.calificacionesUnidades()
+            .toRequestBody("text/xml; charset=utf-8".toMediaType())
+        val response = snApiService.getCalifUnidadesByAlumno(body)
+        return response.string()
+    }
+
+    override suspend fun obtenerCalificacionesFinalesXml(modEducativo: Int): String {
+        val body = SoapRequestBuilder.calificacionesFinales(modEducativo)
+            .toRequestBody("text/xml; charset=utf-8".toMediaType())
+        val response = snApiService.getAllCalifFinalByAlumnos(body)
+        return response.string()
+    }
+
+
+
+    //para soportar la descarga de la carga academica
+    override suspend fun obtenerCargaAcademicaXml(): String {
+        val body = SoapRequestBuilder.cargaAcademica()
+            .toRequestBody("text/xml; charset=utf-8".toMediaType())
+        val response = snApiService.getCargaAcademicaByAlumno(body)
+        return response.string()
+    }
 }
