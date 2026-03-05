@@ -19,20 +19,29 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.appsicenet.ViewModel.LoginViewModel
 import com.example.appsicenet.ViewModel.LoginViewModelFactory
 import com.example.appsicenet.ViewModel.PerfilViewModel
+import com.example.appsicenet.datos.repository.LocalSNRepository
 import com.example.appsicenet.datos.repository.SNRepository
 
 @Composable
 fun HomeScreen(
     onLoginSuccess: () -> Unit,
-    snRepository: SNRepository
-) { //aqui se carga el repositorio de la pantalla de perfil
+    snRepository: SNRepository,
+    localRepository: LocalSNRepository
+) {
+    val context = LocalContext.current
+
     val viewModel: LoginViewModel = viewModel(
-        factory = LoginViewModelFactory(snRepository)
+        factory = LoginViewModelFactory(
+            context = context,
+            snRepository = snRepository,
+            localRepository = localRepository
+        )
     )
 
     var usuario by remember { mutableStateOf("") }

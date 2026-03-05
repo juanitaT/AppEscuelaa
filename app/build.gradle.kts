@@ -73,4 +73,5 @@ dependencies {
     kapt("androidx.room:room-compiler:2.8.4")
     // WorkManager
     implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.compose.material:material-icons-extended")
 }
