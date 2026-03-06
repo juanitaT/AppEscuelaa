@@ -16,12 +16,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.work.WorkManager
 import com.example.appsicenet.ViewModel.CalificacionesViewModel
 import com.example.appsicenet.ViewModel.CalificacionesViewModelFactory
 import com.example.appsicenet.datos.local.entity.CalificacionFinalEntity
@@ -45,9 +47,18 @@ private const val MAX_UNIDADES = 8
 fun CalificacionesScreen(
     localRepository: LocalSNRepository
 ) {
+    val context = LocalContext.current
+
     val viewModel: CalificacionesViewModel = viewModel(
-        factory = CalificacionesViewModelFactory(localRepository)
+        factory = CalificacionesViewModelFactory(
+            localRepository,
+            WorkManager.getInstance(context)
+        )
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.verificarYSincronizar()
+    }
 
     val finales  by viewModel.calificacionesFinales.collectAsState()
     val unidades by viewModel.calificacionesUnidad.collectAsState()
