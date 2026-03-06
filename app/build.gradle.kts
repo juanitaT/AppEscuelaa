@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.appsicenet"
-        minSdk = 24
+        minSdk = 25
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -71,7 +71,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("androidx.room:room-runtime:2.8.3")
     implementation("androidx.room:room-ktx:2.8.3")
-    kapt("androidx.room:room-compiler:2.8.4")
+    kapt("androidx.room:room-compiler:2.8.3")
     // WorkManager
     implementation("androidx.work:work-runtime-ktx:2.9.0")
     implementation("androidx.compose.material:material-icons-extended")

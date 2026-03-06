@@ -24,8 +24,9 @@ import com.example.appsicenet.datos.local.entity.CargaAcademicaEntity
 @Composable
 fun CargaAcademicaItem(materia: CargaAcademicaEntity) {
 
-    val greenPrimary = Color(0xFF2E7D32)
-    val greenLight   = Color(0xFF4CAF50)
+    // ─── Colores AZULES ──────────────────────────────────────────
+    val bluePrimary = Color(0xFF1976D2)    // Azul principal
+    val blueLight   = Color(0xFF42A5F5)    // Azul claro
 
     Card(
         modifier = Modifier
@@ -37,13 +38,13 @@ fun CargaAcademicaItem(materia: CargaAcademicaEntity) {
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
 
-            // Barra verde lateral
+            // Barra AZUL lateral
             Box(
                 modifier = Modifier
                     .width(5.dp)
                     .fillMaxHeight()
                     .clip(RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp))
-                    .background(greenPrimary)
+                    .background(bluePrimary)  // Cambiado a azul
             )
 
             Column(
@@ -69,7 +70,7 @@ fun CargaAcademicaItem(materia: CargaAcademicaEntity) {
                     // Badge de créditos
                     Surface(
                         shape = RoundedCornerShape(20.dp),
-                        color = greenLight.copy(alpha = 0.15f)
+                        color = blueLight.copy(alpha = 0.15f)  // Cambiado a azul claro
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
@@ -78,7 +79,7 @@ fun CargaAcademicaItem(materia: CargaAcademicaEntity) {
                             Icon(
                                 imageVector = Icons.Default.Star,
                                 contentDescription = null,
-                                tint = greenPrimary,
+                                tint = bluePrimary,  // Cambiado a azul
                                 modifier = Modifier.size(14.dp)
                             )
                             Spacer(modifier = Modifier.width(4.dp))
@@ -86,7 +87,7 @@ fun CargaAcademicaItem(materia: CargaAcademicaEntity) {
                                 text = "${materia.creditos} cr.",
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.SemiBold,
-                                color = greenPrimary
+                                color = bluePrimary  // Cambiado a azul
                             )
                         }
                     }
@@ -102,7 +103,7 @@ fun CargaAcademicaItem(materia: CargaAcademicaEntity) {
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
-                Divider(color = Color(0xFFE8F5E9), thickness = 1.dp)
+                Divider(color = Color(0xFFE3F2FD), thickness = 1.dp)  // Cambiado a azul muy claro
                 Spacer(modifier = Modifier.height(10.dp))
 
                 // Filas de info
@@ -125,7 +126,7 @@ private fun InfoRow(icon: ImageVector, label: String, value: String) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = Color(0xFF4CAF50),
+            tint = Color(0xFF1976D2),  // Cambiado a azul principal
             modifier = Modifier.size(16.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))

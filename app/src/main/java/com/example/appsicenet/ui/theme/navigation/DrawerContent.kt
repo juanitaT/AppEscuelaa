@@ -1,6 +1,5 @@
 package com.example.appsicenet.ui.theme.navigation
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -41,10 +40,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material3.ConfirmationDialog
 
-// Colores del tema verde
-private val greenPrimary = Color(0xFF2E7D32)
-private val greenLight = Color(0xFF4CAF50)
-private val greenDark = Color(0xFF1B5E20)
+// ─── Colores AZULES ─────────────────────────────────────────────
+private val bluePrimary = Color(0xFF1976D2)    // Azul principal
+private val blueLight = Color(0xFF42A5F5)      // Azul claro
+private val blueDark = Color(0xFF0D47A1)       // Azul oscuro
 
 @Composable
 fun DrawerContent(
@@ -57,7 +56,7 @@ fun DrawerContent(
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Header con gradiente verde
+        // Header con gradiente AZUL
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,9 +64,9 @@ fun DrawerContent(
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            greenDark,
-                            greenPrimary,
-                            greenLight
+                            blueDark,      // Azul oscuro
+                            bluePrimary,   // Azul principal
+                            blueLight      // Azul claro
                         )
                     )
                 ),
@@ -131,7 +130,7 @@ fun DrawerContent(
         Spacer(modifier = Modifier.weight(1f))
 
         Divider(
-            color = greenLight.copy(alpha = 0.3f),
+            color = blueLight.copy(alpha = 0.3f),  // Cambiado a azul claro
             thickness = 1.dp,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
@@ -172,7 +171,7 @@ fun DrawerMenuItem(
     isLogout: Boolean = false
 ) {
     val textColor = if (isLogout) Color(0xFFD32F2F) else Color.Black
-    val iconColor = if (isLogout) Color(0xFFD32F2F) else greenPrimary
+    val iconColor = if (isLogout) Color(0xFFD32F2F) else bluePrimary  // Cambiado a azul principal
 
     Row(
         modifier = Modifier

@@ -23,11 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 
-
-// Colores del tema verde
-private val greenPrimary = Color(0xFF2E7D32)
-private val greenLight = Color(0xFF4CAF50)
-private val greenDark = Color(0xFF1B5E20)
+// ─── Colores AZULES ─────────────────────────────────────────────
+private val bluePrimary = Color(0xFF1976D2)    // Azul principal
+private val blueLight = Color(0xFF42A5F5)      // Azul claro
+private val blueDark = Color(0xFF0D47A1)       // Azul oscuro
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,7 +75,7 @@ fun AppScaffold(
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = greenPrimary,
+                        containerColor = bluePrimary,  // Cambiado a azul principal
                         titleContentColor = Color.White,
                         navigationIconContentColor = Color.White
                     )

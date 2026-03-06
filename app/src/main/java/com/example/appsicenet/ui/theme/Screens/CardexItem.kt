@@ -1,3 +1,4 @@
+
 package com.example.appsicenet.ui.theme.Screens
 
 import androidx.compose.foundation.background
@@ -20,26 +21,34 @@ import com.example.appsicenet.datos.local.entity.CardexEntity
 @Composable
 fun CardexItem(materia: CardexEntity) {
 
-    val greenPrimary = Color(0xFF2E7D32)
-    val greenLight   = Color(0xFF4CAF50)
+    val bluePrimary = Color(0xFF1976D2)    // Azul principal
+    val blueLight   = Color(0xFF42A5F5)    // Azul claro
 
     val acreditado = materia.calificacion >= 70
     val enCurso = materia.calificacion == 0
 
     val calificacion = materia.calificacion
-    //.toIntOrNull() ?: 0
+
+    // Colores para la calificación en tonos azules
     val calColor = when {
-        calificacion >= 80 -> Color(0xFF2E7D32)
-        calificacion >= 70 -> Color(0xFF388E3C)
+        calificacion >= 80 -> Color(0xFF0D47A1)
+        calificacion >= 70 -> Color(0xFF1976D2)
         calificacion >  0  -> Color(0xFFC62828)
         else               -> Color.Gray
     }
-    val cardBackground = if (acreditado) Color(0xFFF9FFF9) else Color(0xFFFFF9F9)
+
+    // Fondo de la tarjeta según estado (azul muy claro para aprobadas)
+    val cardBackground = if (acreditado)
+        Color(0xFFF0F7FF)
+    else
+        Color(0xFFFFF9F9)
+
     val statusColor = when {
         enCurso -> Color.Gray
-        acreditado -> greenPrimary
+        acreditado -> bluePrimary
         else -> Color(0xFFC62828)
     }
+
     val statusLabel = when {
         enCurso -> "En curso"
         acreditado -> "✓ Acreditada"

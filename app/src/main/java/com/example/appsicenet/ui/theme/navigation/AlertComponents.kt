@@ -28,12 +28,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// Colores del tema verde
-val GreenPrimary = Color(0xFF2E7D32)
-val GreenLight = Color(0xFF4CAF50)
-val GreenDark = Color(0xFF1B5E20)
-val RedError = Color(0xFFD32F2F)
-val BlueInfo = Color(0xFF1976D2)
+// ─── Colores AZULES ─────────────────────────────────────────────
+val BluePrimary = Color(0xFF1976D2)    // Azul principal
+val BlueLight = Color(0xFF42A5F5)      // Azul claro
+val BlueDark = Color(0xFF0D47A1)       // Azul oscuro
+val RedError = Color(0xFFD32F2F)        // Rojo (mantenido para errores)
+val BlueInfo = Color(0xFF1976D2)        // Azul para info
 
 enum class AlertType {
     SUCCESS,
@@ -56,17 +56,17 @@ fun CustomSnackbar(
 ) {
     val (backgroundColor, icon, iconTint) = when (type) {
         AlertType.SUCCESS -> Triple(
-            GreenPrimary,
+            BluePrimary,          // Azul principal para éxito
             Icons.Default.CheckCircle,
             Color.White
         )
         AlertType.ERROR -> Triple(
-            RedError,
+            RedError,             // Rojo para error (se mantiene)
             Icons.Default.Error,
             Color.White
         )
         AlertType.INFO -> Triple(
-            BlueInfo,
+            BlueLight,            // Azul claro para info
             Icons.Default.Info,
             Color.White
         )
@@ -132,7 +132,7 @@ fun ConfirmationDialog(
                 text = title,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-                color = GreenPrimary
+                color = BluePrimary  // Cambiado a azul principal
             )
         },
         text = {
@@ -151,7 +151,7 @@ fun ConfirmationDialog(
             ) {
                 Text(
                     text = confirmText,
-                    color = GreenPrimary,
+                    color = BluePrimary,  // Cambiado a azul principal
                     fontWeight = FontWeight.SemiBold
                 )
             }
