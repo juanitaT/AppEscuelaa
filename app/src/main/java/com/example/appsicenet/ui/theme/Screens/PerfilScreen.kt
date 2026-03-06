@@ -41,7 +41,7 @@ import com.example.appsicenet.datos.repository.SNRepository
 
 @Composable
 fun PerfilScreen(
-    snRepository: SNRepository,
+    matricula: String,
     localRepository: LocalSNRepository,
 ) {
     val context = LocalContext.current

@@ -6,7 +6,7 @@ import com.example.appsicenet.datos.worker.SicenetWorkerFactory
 import com.example.appsicenet.di.DefaultAppContainer
 
 
-class SicenetApp : Application(), Configuration.Provider {
+class AppSicenet : Application(), Configuration.Provider {
 
     lateinit var container: DefaultAppContainer
 

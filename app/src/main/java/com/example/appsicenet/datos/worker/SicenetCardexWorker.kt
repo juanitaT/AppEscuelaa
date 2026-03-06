@@ -19,8 +19,7 @@ class SicenetCardexWorker(
             Log.d("WM_CARDEX_RED", "Consultando cardex")
 
             val container = DefaultAppContainer(applicationContext)
-            val repository = container.NetworSNRepository
-
+            val repository = container.networkSNRepository
             val xml = repository.obtenerCardexXml()
 
             Log.d("CARDEX_XML_COMPLETO", xml)
