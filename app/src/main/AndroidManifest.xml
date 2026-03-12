@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <permission
+        android:name="com.example.appsicenet.permission.READ_SICENET"
+        android:protectionLevel="normal" />
+
+    <permission
+        android:name="com.example.appsicenet.permission.WRITE_SICENET"
+        android:protectionLevel="normal" />
+
     <application
         android:name=".AppSicenet"
         android:allowBackup="true"
@@ -18,6 +26,15 @@
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
             tools:node="remove" />
+
+        <provider
+            android:name=".provider.SicenetProvider"
+            android:authorities="com.example.sicenet.provider"
+            android:exported="true"
+            android:readPermission="com.example.appsicenet.permission.READ_SICENET"
+            android:writePermission="com.example.appsicenet.permission.WRITE"
+            />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
